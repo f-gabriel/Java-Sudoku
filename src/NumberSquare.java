@@ -33,8 +33,10 @@ public class NumberSquare {
     }
 
     private int findSquareNumber(){
-
-        return ((row % 3)+1) * ((column % 3) +1) -1;
+        int rowMult = ((row) /3);
+        int columnMult = ((column) / 3);
+        //System.out.println("row = "+row+", column = "+column+", rowMult = "+rowMult+ ", colMult = " +columnMult); // todo remove
+        return 3 * rowMult + columnMult;
     }
 
     public int getRowNumber() {
@@ -79,7 +81,7 @@ public class NumberSquare {
     private int getRandomViableNumber(List<Integer> viableNumbers){
         Random r = new Random();
 
-        System.out.println(viableNumbers);
+        //System.out.println(viableNumbers); // todo remove
         int randomIndexViableNumbers = r.nextInt(viableNumbers.size());
         return viableNumbers.get(randomIndexViableNumbers);
     }

@@ -1,9 +1,12 @@
 import java.util.Arrays;
 
 class Main {
-  static GameBoard gameBoard = new GameBoard();
+  GameBoard gameBoard = new GameBoard();
 
-  public static void main(){
+  public void main(String[] args){
+    while (gameBoard.getNumberSquareAtPos(8,8) == null){
+      this.gameBoard = new GameBoard();
+    }
     System.out.println(gameBoard.toString());
   }
 

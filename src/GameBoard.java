@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GameBoard {
     NumberSquare[][] gameBoard;
@@ -9,15 +11,21 @@ public class GameBoard {
 
     }
 
+    NumberSquare getNumberSquareAtPos(int row, int column){
+        return gameBoard[row][column];
+    }
+
     void createGameBoard(){
         this.gameBoard = new NumberSquare[9][9];
         for(int row = 0; row <= 8; row++){
             for(int column = 0; column <= 8; column++){
                 NumberSquare ns = new NumberSquare(row, column);
                 List<Integer> nonAvailableNumbers = findNonAvailableNumbers(ns);
-                if (nonAvailableNumbers.size() == 9){
-                    System.out.println(nonAvailableNumbers);
-                    System.out.println(toString());
+                if (nonAvailableNumbers.size() == 9){// todo remove
+                    //System.out.println(nonAvailableNumbers);// todo remove
+                    //System.out.println(toString());// todo remove
+                    //createGameBoard();// todo remove
+                    break;// todo remove
                 }
                 ns.assignValue(nonAvailableNumbers);
                 gameBoard[row][column] = ns;
@@ -26,26 +34,29 @@ public class GameBoard {
     }
 
     List<Integer> findNonAvailableNumbers(NumberSquare nSquare){
-        ArrayList<Integer> nonAvailables = new ArrayList<>();
+        LinkedHashSet<Integer> nonVialables = new LinkedHashSet<>();
         List<Integer> row = retrieveValuesFromNumberSquareList(get_row(nSquare));
         for(int number : row){
             if(number != 0){
-                nonAvailables.add(number);
+                nonVialables.add(number);
             }
         }
+        //System.out.println("row: "+row);// todo remove
         List<Integer> column = retrieveValuesFromNumberSquareList(get_column(nSquare));
         for(int number : column){
             if(number != 0){
-                nonAvailables.add(number);
+                nonVialables.add(number);
             }
         }
+        //System.out.println("column: "+column);// todo remove
         List<Integer> square = retrieveValuesFromNumberSquareList(get_square(nSquare));
         for(int number : square){
             if(number != 0){
-                nonAvailables.add(number);
+                nonVialables.add(number);
             }
         }
-        return nonAvailables;
+        //System.out.println("square: "+square);// todo remove
+        return setToList(nonVialables);
     }
 
     List<Integer> retrieveValuesFromNumberSquareList(NumberSquare[] nSquareList){
@@ -72,8 +83,13 @@ public class GameBoard {
 
     NumberSquare[] get_square(NumberSquare nSquare){
         NumberSquare[] square = new NumberSquare[9];
-        int column_number = nSquare.getSquareNumber() % 3;
-        int row_number = (int) nSquare.getSquareNumber() / (column_number+1);
+        int squareNumber = nSquare.getSquareNumber();
+        int column_number = 3 * (((squareNumber) % 3));
+        int row_number = (squareNumber - (squareNumber % 3));
+
+
+        //System.out.println("squareNumber = " + nSquare.getSquareNumber()); //todo remove
+        //System.out.println(column_number +","+ row_number); //todo remove
 
         for(int row = 0; row <= 2; row++){
             for(int column = 0; column <= 2; column++){
@@ -84,6 +100,11 @@ public class GameBoard {
         return square;
     }
 
+    private List<Integer> setToList(Set<Integer> set){
+        ArrayList<Integer> returnList = new ArrayList<>();
+        returnList.addAll(set);
+        return returnList;
+    }
     public String toString(){
         StringBuilder returnString = new StringBuilder();
         for(int row = 0; row <= 8; row++) {
@@ -93,12 +114,11 @@ public class GameBoard {
     }
     private String rowToString(int row){
         StringBuilder returnString = new StringBuilder();
-        if(row != 0) {
-            returnString.append("\n");
-            if ((row) % 3 == 0) {
-                returnString.append("_____________________\n");
-            }
+        returnString.append("\n");
+        if ((row) % 3 == 0) {
+            returnString.append("_____________________\n");
         }
+
         returnString.append(columnToString(row));
         return returnString.toString();
     }
