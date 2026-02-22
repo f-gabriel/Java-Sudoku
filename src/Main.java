@@ -5,7 +5,6 @@ class Main {
 
   public static void main(){
     System.out.println(gameBoard.toString());
-    System.out.println(Arrays.toString(gameBoard.get_square(0)));
   }
 
 

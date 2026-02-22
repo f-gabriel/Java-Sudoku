@@ -1,5 +1,8 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class GameBoard {
-    int[][] gameBoard;
+    NumberSquare[][] gameBoard;
 
     GameBoard(){
         createGameBoard();
@@ -7,28 +10,71 @@ public class GameBoard {
     }
 
     void createGameBoard(){
-        this.gameBoard = new int[9][9];
-        for(int[] row : gameBoard){
-            for(int i = 1; i <= 9; i++){
-                row[i-1] = i;
+        this.gameBoard = new NumberSquare[9][9];
+        for(int row = 0; row <= 8; row++){
+            for(int column = 0; column <= 8; column++){
+                NumberSquare ns = new NumberSquare(row, column);
+                List<Integer> nonAvailableNumbers = findNonAvailableNumbers(ns);
+                if (nonAvailableNumbers.size() == 9){
+                    System.out.println(nonAvailableNumbers);
+                    System.out.println(toString());
+                }
+                ns.assignValue(nonAvailableNumbers);
+                gameBoard[row][column] = ns;
             }
         }
     }
 
-    int[] get_row(int row_number){
-        return gameBoard[row_number];
+    List<Integer> findNonAvailableNumbers(NumberSquare nSquare){
+        ArrayList<Integer> nonAvailables = new ArrayList<>();
+        List<Integer> row = retrieveValuesFromNumberSquareList(get_row(nSquare));
+        for(int number : row){
+            if(number != 0){
+                nonAvailables.add(number);
+            }
+        }
+        List<Integer> column = retrieveValuesFromNumberSquareList(get_column(nSquare));
+        for(int number : column){
+            if(number != 0){
+                nonAvailables.add(number);
+            }
+        }
+        List<Integer> square = retrieveValuesFromNumberSquareList(get_square(nSquare));
+        for(int number : square){
+            if(number != 0){
+                nonAvailables.add(number);
+            }
+        }
+        return nonAvailables;
     }
-    int[] get_column(int column_number){
-        int[] column = new int[9];
+
+    List<Integer> retrieveValuesFromNumberSquareList(NumberSquare[] nSquareList){
+        ArrayList<Integer> values = new ArrayList<>();
+        for(NumberSquare square : nSquareList){
+            if(square != null){
+                values.add(square.getValue());
+            }
+        }
+        return values;
+    }
+
+    NumberSquare[] get_row(NumberSquare nSquare){
+        return gameBoard[nSquare.getRowNumber()];
+    }
+
+    NumberSquare[] get_column(NumberSquare nSquare){
+        NumberSquare[] column = new NumberSquare[9];
         for(int i = 0; i <= 8; i++ ) {
-            column[i] = gameBoard[i][column_number];
+            column[i] = gameBoard[i][nSquare.getColumnNumber()];
         }
         return column;
     }
-    int[] get_square(int square_number){
-        int[] square = new int[9];
-        int column_number = square_number % 3;
-        int row_number = (int) square_number / (column_number+1);
+
+    NumberSquare[] get_square(NumberSquare nSquare){
+        NumberSquare[] square = new NumberSquare[9];
+        int column_number = nSquare.getSquareNumber() % 3;
+        int row_number = (int) nSquare.getSquareNumber() / (column_number+1);
+
         for(int row = 0; row <= 2; row++){
             for(int column = 0; column <= 2; column++){
                 int square_index = 3 * row + column;
@@ -59,10 +105,10 @@ public class GameBoard {
     private String columnToString(int row){
         StringBuilder returnString = new StringBuilder();
         for (int place = 0; place <= 8; place++) {
-            if (gameBoard[row][place] == 0) {
+            if (gameBoard[row][place] == null || gameBoard[row][place].getValue() == 0) { // should be getInputValue()
                 returnString.append("_ ");
             } else {
-                returnString.append(gameBoard[row][place] + " ");
+                returnString.append(gameBoard[row][place].getValue() + " ");
             }
             if((place + 1) % 3 == 0 && place != 8){
                 returnString.append("| ");
