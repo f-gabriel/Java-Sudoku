@@ -8,11 +8,22 @@ public class GameBoard {
 
     GameBoard(){
         createGameBoard();
-
     }
 
     NumberSquare getNumberSquareAtPos(int row, int column){
         return gameBoard[row][column];
+    }
+
+    public boolean isSolvable(){
+        boolean isSolvable = true;
+        for(NumberSquare[] row : gameBoard){
+            if (!isSolvable){break;}
+            for(NumberSquare nSquare : row){
+                isSolvable = nSquare != null;
+                if (!isSolvable){break;}
+            }
+        }
+        return isSolvable;
     }
 
     void createGameBoard(){
