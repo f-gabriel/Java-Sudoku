@@ -18,6 +18,9 @@ public class NumberSquare implements IHasNumberSquare{
         this.startValue = 0;
     }
 
+    public static int[] getAllowedNumbers(){
+        return allowedNumbers;
+    }
     NumberSquare(int row, int column, List<Integer> nonViableNumbers){
         this.row = row;
         this.column = column;

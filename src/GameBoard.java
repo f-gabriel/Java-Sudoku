@@ -7,8 +7,7 @@ public class GameBoard {
     NumberSquare[][] gameBoard = new NumberSquare[9][9];
 
     GameBoard(){
-        while (!isSolvable()){createGameBoard();}
-    }
+        while (!isSolvable()){createGameBoard();}}
     
     void createGameBoard(){
         this.gameBoard = new NumberSquare[9][9];
@@ -16,7 +15,9 @@ public class GameBoard {
             for(int column = 0; column <= 8; column++){
                 NumberSquare ns = new NumberSquare(row, column);
                 List<Integer> nonavailableNumbers = findNonAvailableNumbers(ns);
-                if (nonavailableNumbers.size() == 9){break;}
+                if (nonavailableNumbers.size() == 9) {
+                    break;
+                }
                 ns.assignValue(nonavailableNumbers);
                 gameBoard[row][column] = ns;}
         }
@@ -33,19 +34,18 @@ public class GameBoard {
         }
         return solvable;
     }
-
-
-
-    NumberSquare[] getRow(NumberSquare nSquare){
+    public NumberSquare[] getRow(NumberSquare nSquare){
         return gameBoard[nSquare.getRowNumber()];}
-    NumberSquare[] getColumn(NumberSquare nSquare){
+    public NumberSquare[] getRow(int row){
+        return gameBoard[row];}
+    public NumberSquare[] getColumn(NumberSquare nSquare){
         NumberSquare[] column = new NumberSquare[9];
         for(int i = 0; i <= 8; i++ ) {
             column[i] = gameBoard[i][nSquare.getColumnNumber()];
         }
         return column;
     }
-    NumberSquare[] getSquare(NumberSquare nSquare){
+    public NumberSquare[] getSquare(NumberSquare nSquare){
         NumberSquare[] square = new NumberSquare[9];
         int squareNumber = nSquare.getSquareNumber();
         int column_number = 3 * (((squareNumber) % 3));
@@ -53,83 +53,44 @@ public class GameBoard {
         for(int row = 0; row <= 2; row++){
             for(int column = 0; column <= 2; column++){
                 int square_index = 3 * row + column;
-                square[square_index] = gameBoard[row + row_number][column + column_number];
-            }
+                square[square_index] = gameBoard[row + row_number][column + column_number];}
         }
         return square;
     }
+    private NumberSquare getNumberSquareAtPos(int row, int column){return gameBoard[row][column];}
 
     List<Integer> findNonAvailableNumbers(NumberSquare nSquare){
         LinkedHashSet<Integer> nonviables = new LinkedHashSet<>();
-        List<Integer> row = retrieveValuesFromNumberSquareList(getRow(nSquare));
+        List<Integer> row = translateNumberSquaresToInts(getRow(nSquare));
         for(int number : row){
             if(number != 0) {nonviables.add(number);}
         }
-        List<Integer> column = retrieveValuesFromNumberSquareList(getColumn(nSquare));
+        List<Integer> column = translateNumberSquaresToInts(getColumn(nSquare));
         for(int number : column){
             if(number != 0) {nonviables.add(number);}
         }
-        List<Integer> square = retrieveValuesFromNumberSquareList(getSquare(nSquare));
+        List<Integer> square = translateNumberSquaresToInts(getSquare(nSquare));
         for(int number : square){
             if(number != 0) {nonviables.add(number);}
         }
-        return setToList(nonviables);
+        return new ArrayList<>(nonviables);
     }
-
     public int[][] sudokuIntRepresentation(VALUETYPE valuteType){
         int[][] representation = new int[9][9];
-        for(int row = 0; row >= 8; row++){
-            int[] rowRepresentation = new int[9];
-            for(int column = 0; column >= 8; column++){
-                NumberSquare nSquare = getNumberSquareAtPos(row, column);
-                rowRepresentation[column] = nSquare.getValue(valuteType);
-            }
-            representation[row] = rowRepresentation;
-        }
+        for(int row = 0; row <= 8; row++){
+            List<Integer> rowList = translateNumberSquaresToInts(getRow(row));
+            int[] intList = new int[9];
+            for(int i = 0; i <= 8; i++){
+                intList[i] = rowList.get(i);}
+            representation[row] = intList;}
         return representation;
     }
-
-
     public String toString(){
-
-
-        StringBuilder returnString = new StringBuilder();
-        for(int row = 0; row <= 8; row++) {returnString.append(rowToString(row));}
-        return returnString.toString();
+        int[][] sudoku = sudokuIntRepresentation(VALUETYPE.START);
+        SudokuStringRepresentation sr = new SudokuStringRepresentation(sudoku);
+        return sr.toString();
     }
-    String rowToString(int row){
-        StringBuilder returnString = new StringBuilder();
-        if (row != 0) {
-            returnString.append("\n");
-            if ((row) % 3 == 0) {
-                returnString.append("_____________________\n");}
-        }
-        returnString.append(columnToString(row));
-        return returnString.toString();
-    }
-    String columnToString(int row){
-        StringBuilder returnString = new StringBuilder();
-        for (int place = 0; place <= 8; place++) {
-            if (gameBoard[row][place] == null || gameBoard[row][place].getStartValue() == 0) { // should be getInputValue()
-                returnString.append("_ ");
-            } else {
-                returnString.append(gameBoard[row][place].getStartValue() + " ");
-            }
-            if((place + 1) % 3 == 0 && place != 8){
-                returnString.append("| ");}
-        }
-        return returnString.toString();
-    }
-
-    NumberSquare getNumberSquareAtPos(int row, int column){return gameBoard[row][column];}
-
-    // translates data from one kind to another
-    private List<Integer> setToList(Set<Integer> set){
-        ArrayList<Integer> returnList = new ArrayList<>();
-        returnList.addAll(set);
-        return returnList;
-    }
-    List<Integer> retrieveValuesFromNumberSquareList(NumberSquare[] nSquareList){
+    public List<Integer> translateNumberSquaresToInts(NumberSquare[] nSquareList){
         ArrayList<Integer> values = new ArrayList<>();
         for(NumberSquare square : nSquareList){
             if(square != null) {values.add(square.getStartValue());}
