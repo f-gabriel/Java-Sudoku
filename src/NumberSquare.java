@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class NumberSquare {
-    static final int[] allowed_numbers = {1,2,3,4,5,6,7,8,9};
+public class NumberSquare implements IHasNumberSquare{
+    static final int[] allowedNumbers = {1,2,3,4,5,6,7,8,9};
 
     private final int row;
     private final int column;
@@ -33,10 +33,7 @@ public class NumberSquare {
     }
 
     private int findSquareNumber(){
-        int rowMult = ((row) /3);
-        int columnMult = ((column) / 3);
-        //System.out.println("row = "+row+", column = "+column+", rowMult = "+rowMult+ ", colMult = " +columnMult); // todo remove
-        return 3 * rowMult + columnMult;
+        return 3 * ((row) /3) + ((column) / 3);
     }
 
     public int getRowNumber() {
@@ -62,26 +59,19 @@ public class NumberSquare {
     void assignValue(List<Integer> nonViableNumbers){
         if (value == 0){
             List<Integer> viableNumbers = getViableNumbers(nonViableNumbers);
-
-            this.value = getRandomViableNumber(viableNumbers);
-        }
+            this.value = getRandomViableNumber(viableNumbers);}
     }
 
-    private List<Integer> getViableNumbers(List<Integer> nonViableNumbers){
+    public List<Integer> getViableNumbers(List<Integer> nonViableNumbers){
         ArrayList<Integer> viableNumbers = new ArrayList<>();
-        for(int number : allowed_numbers){
-            if(nonViableNumbers.contains(number)){
-                continue;
-            }
-            viableNumbers.add(number);
-        }
+        for(int number : allowedNumbers){
+            if(nonViableNumbers.contains(number)) {continue;}
+            viableNumbers.add(number);}
         return viableNumbers;
     }
 
     private int getRandomViableNumber(List<Integer> viableNumbers){
         Random r = new Random();
-
-        //System.out.println(viableNumbers); // todo remove
         int randomIndexViableNumbers = r.nextInt(viableNumbers.size());
         return viableNumbers.get(randomIndexViableNumbers);
     }
