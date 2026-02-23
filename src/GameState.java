@@ -1,8 +1,9 @@
 public class GameState {
-    GameBoard gboard = new GameBoard();
+    GameBoard gboard;
 
     GameState(){
-
+        this.gboard = new GameBoard();
     }
+
 
 }

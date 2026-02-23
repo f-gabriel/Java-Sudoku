@@ -8,14 +8,14 @@ public class NumberSquare implements IHasNumberSquare{
     private final int row;
     private final int column;
     private final int square;
-    private int value;
-    private int input_value;
+    private int startValue;
+    private int inputValue;
 
     NumberSquare(int row, int column){
         this.row = row;
         this.column = column;
         this.square = findSquareNumber();
-        this.value = 0;
+        this.startValue = 0;
     }
 
     NumberSquare(int row, int column, List<Integer> nonViableNumbers){
@@ -25,11 +25,11 @@ public class NumberSquare implements IHasNumberSquare{
         assignValue(nonViableNumbers);
     }
 
-    NumberSquare(int row, int column, int value){
+    NumberSquare(int row, int column, int startValue){
         this.row = row;
         this.column = column;
         this.square = findSquareNumber();
-        this.value = value;
+        this.startValue = startValue;
     }
 
     private int findSquareNumber(){
@@ -45,21 +45,26 @@ public class NumberSquare implements IHasNumberSquare{
     public int getSquareNumber() {
         return square;
     }
-    public int getValue() {
-        return value;
+    public int getStartValue() {
+        return startValue;
     }
     public int getInputValue() {
-        return input_value;
+        return inputValue;
     }
     public void setInputValue(int input_value){
-        this.input_value = input_value;
+        this.inputValue = input_value;
+    }
+    public int getValue(VALUETYPE value){
+        return switch (value) {
+            case START -> getStartValue();
+            case INPUT -> getInputValue();
+        };
     }
 
-
     void assignValue(List<Integer> nonViableNumbers){
-        if (value == 0){
+        if (startValue == 0){
             List<Integer> viableNumbers = getViableNumbers(nonViableNumbers);
-            this.value = getRandomViableNumber(viableNumbers);}
+            this.startValue = getRandomViableNumber(viableNumbers);}
     }
 
     public List<Integer> getViableNumbers(List<Integer> nonViableNumbers){
