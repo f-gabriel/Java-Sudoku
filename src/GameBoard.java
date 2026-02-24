@@ -3,16 +3,16 @@ import java.util.LinkedHashSet;
 import java.util.List;
 
 public class GameBoard {
-    NumberSquare[][] gameBoard = new NumberSquare[9][9];
+    NumberTile[][] gameBoard = new NumberTile[9][9];
 
     GameBoard(){
         while (!isSolvable()){createGameBoard();}}
     
     void createGameBoard(){
-        this.gameBoard = new NumberSquare[9][9];
+        this.gameBoard = new NumberTile[9][9];
         for(int row = 0; row <= 8; row++){
             for(int column = 0; column <= 8; column++){
-                NumberSquare ns = new NumberSquare(row, column);
+                NumberTile ns = new NumberTile(row, column);
                 List<Integer> nonavailableNumbers = findNonAvailableNumbers(ns);
                 if (nonavailableNumbers.size() == 9) {
                     break;
@@ -24,29 +24,30 @@ public class GameBoard {
 
     public boolean isSolvable(){
         boolean solvable = true;
-        for(NumberSquare[] row : gameBoard){
+        for(NumberTile[] row : gameBoard){
             if (!solvable){break;}
-            for(NumberSquare nSquare : row){
-                solvable = nSquare != null;
-                if (!solvable){break;}
-            }
+            for(NumberTile nTile : row){
+                solvable = nTile != null;
+                if (!solvable){break;} }
         }
         return solvable;
     }
-    public NumberSquare[] getRow(NumberSquare nSquare){
-        return gameBoard[nSquare.getRowNumber()];}
-    public NumberSquare[] getRow(int row){
+
+    public NumberTile[] getRow(NumberTile nTile){
+        return gameBoard[nTile.getRowNumber()];}
+    public NumberTile[] getRow(int row){
         return gameBoard[row];}
-    public NumberSquare[] getColumn(NumberSquare nSquare){
-        NumberSquare[] column = new NumberSquare[9];
+
+    public NumberTile[] getColumn(NumberTile nTile){
+        NumberTile[] column = new NumberTile[9];
         for(int i = 0; i <= 8; i++ ) {
-            column[i] = gameBoard[i][nSquare.getColumnNumber()];
+            column[i] = gameBoard[i][nTile.getColumnNumber()];
         }
         return column;
     }
-    public NumberSquare[] getSquare(NumberSquare nSquare){
-        NumberSquare[] square = new NumberSquare[9];
-        int squareNumber = nSquare.getSquareNumber();
+    public NumberTile[] getSquare(NumberTile nTile){
+        NumberTile[] square = new NumberTile[9];
+        int squareNumber = nTile.getSquareNumber();
         int column_number = 3 * (((squareNumber) % 3));
         int row_number = (squareNumber - (squareNumber % 3));
         for(int row = 0; row <= 2; row++){
@@ -56,28 +57,29 @@ public class GameBoard {
         }
         return square;
     }
-    public NumberSquare getNumberSquareAtPos(int row, int column){return gameBoard[row][column];}
+    public NumberTile getNumberTileAtPos(int row, int column){return gameBoard[row][column];}
 
-    List<Integer> findNonAvailableNumbers(NumberSquare nSquare){
+    List<Integer> findNonAvailableNumbers(NumberTile nTile){
         LinkedHashSet<Integer> nonviables = new LinkedHashSet<>();
-        List<Integer> row = translateNumberSquaresToInts(getRow(nSquare), VALUETYPE.REAL);
+        List<Integer> row = translateNumberTileToInts(getRow(nTile), VALUETYPE.REAL);
         for(int number : row){
             if(number != 0) {nonviables.add(number);}
         }
-        List<Integer> column = translateNumberSquaresToInts(getColumn(nSquare), VALUETYPE.REAL);
+        List<Integer> column = translateNumberTileToInts(getColumn(nTile), VALUETYPE.REAL);
         for(int number : column){
             if(number != 0) {nonviables.add(number);}
         }
-        List<Integer> square = translateNumberSquaresToInts(getSquare(nSquare), VALUETYPE.REAL);
+        List<Integer> square = translateNumberTileToInts(getSquare(nTile), VALUETYPE.REAL);
         for(int number : square){
             if(number != 0) {nonviables.add(number);}
         }
         return new ArrayList<>(nonviables);
     }
+
     public int[][] sudokuIntRepresentation(VALUETYPE valuteType){
         int[][] representation = new int[9][9];
         for(int row = 0; row <= 8; row++){
-            List<Integer> rowList = translateNumberSquaresToInts(getRow(row), valuteType);
+            List<Integer> rowList = translateNumberTileToInts(getRow(row), valuteType);
             int[] intList = new int[9];
             for(int i = 0; i <= 8; i++){
                 intList[i] = rowList.get(i);}
@@ -89,8 +91,8 @@ public class GameBoard {
         SudokuStringRepresentation sr = new SudokuStringRepresentation(sudoku);
         return sr.toString();
     }
-    public List<Integer> translateNumberSquaresToInts(NumberSquare[] nSquareList, VALUETYPE valuetype){
-        return SudokuStringRepresentation.translateNumberSquaresToInts(nSquareList, valuetype);
+    public List<Integer> translateNumberTileToInts(NumberTile[] nSquareList, VALUETYPE valuetype){
+        return SudokuStringRepresentation.translateNumberTileToInts(nSquareList, valuetype);
     }
 
 

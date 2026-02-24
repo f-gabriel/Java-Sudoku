@@ -16,19 +16,19 @@ public class GameState {
             int randomRow = r.nextInt(0,8);
             int randomColumn = r.nextInt(0,8);
 
-            NumberSquare ns = gBoard.getNumberSquareAtPos(randomRow, randomColumn);
+            NumberTile ns = gBoard.getNumberTileAtPos(randomRow, randomColumn);
             switch (getSquarePosition(ns.getSquareNumber())){
                 case CORNER, MIDDLE: {
-                    NumberSquare ns2 = gBoard.getNumberSquareAtPos(8- randomRow, randomColumn);
-                    NumberSquare ns3 = gBoard.getNumberSquareAtPos(randomRow, 8- randomColumn);
-                    NumberSquare ns4 = gBoard.getNumberSquareAtPos(8- randomRow, 8- randomColumn);
+                    NumberTile ns2 = gBoard.getNumberTileAtPos(8- randomRow, randomColumn);
+                    NumberTile ns3 = gBoard.getNumberTileAtPos(randomRow, 8- randomColumn);
+                    NumberTile ns4 = gBoard.getNumberTileAtPos(8- randomRow, 8- randomColumn);
                     ns.setToStartValue();
                     ns2.setToStartValue();
                     ns3.setToStartValue();
                     ns4.setToStartValue();
                 }
                 case VERTICAL, HORIZONTAL: {
-                    NumberSquare ns2 = gBoard.getNumberSquareAtPos(8- randomRow, 8- randomColumn);
+                    NumberTile ns2 = gBoard.getNumberTileAtPos(8- randomRow, 8- randomColumn);
                     ns.setToStartValue();
                     ns2.setToStartValue();
                 }

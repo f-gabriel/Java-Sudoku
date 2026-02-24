@@ -37,10 +37,10 @@ public class SudokuStringRepresentation implements IHasSudokuStringRepresentatio
         return returnString.toString();
     }
 
-    public static List<Integer> translateNumberSquaresToInts(NumberSquare[] nSquareList, VALUETYPE valuetype){
+    public static List<Integer> translateNumberTileToInts(NumberTile[] nTileList, VALUETYPE valuetype){
         ArrayList<Integer> values = new ArrayList<>();
-        for(NumberSquare square : nSquareList){
-            if(square != null) {values.add(square.getValue(valuetype));}
+        for(NumberTile tile : nTileList){
+            if(tile != null) {values.add(tile.getValue(valuetype));}
         }
         return values;
     }

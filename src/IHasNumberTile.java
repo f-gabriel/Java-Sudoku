@@ -1,6 +1,6 @@
 import java.util.List;
 
-public interface IHasNumberSquare {
+public interface IHasNumberTile {
 
     public int getRealValue();
     public int getInputValue();
