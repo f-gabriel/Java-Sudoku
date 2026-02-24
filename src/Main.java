@@ -1,5 +1,5 @@
 class Main {
-  GameBoard gameBoard = new GameBoard();
+  GameState gameBoard = new GameState();
 
   public void main(String[] args){
 

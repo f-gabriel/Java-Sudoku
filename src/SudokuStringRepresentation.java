@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class SudokuStringRepresentation implements IHasSudokuStringRepresentation {
     int[][] gameBoard;
 
@@ -22,8 +25,6 @@ public class SudokuStringRepresentation implements IHasSudokuStringRepresentatio
     }
     String columnToString(int row ){
         StringBuilder returnString = new StringBuilder();
-
-
         for (int place = 0; place <= 8; place++) {
             if (gameBoard[row][place] == 0) { // should be getInputValue()
                 returnString.append("_ ");
@@ -34,5 +35,13 @@ public class SudokuStringRepresentation implements IHasSudokuStringRepresentatio
                 returnString.append("| ");}
         }
         return returnString.toString();
+    }
+
+    public static List<Integer> translateNumberSquaresToInts(NumberSquare[] nSquareList, VALUETYPE valuetype){
+        ArrayList<Integer> values = new ArrayList<>();
+        for(NumberSquare square : nSquareList){
+            if(square != null) {values.add(square.getValue(valuetype));}
+        }
+        return values;
     }
 }

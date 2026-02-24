@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 public class GameBoard {
     NumberSquare[][] gameBoard = new NumberSquare[9][9];
@@ -57,19 +56,19 @@ public class GameBoard {
         }
         return square;
     }
-    private NumberSquare getNumberSquareAtPos(int row, int column){return gameBoard[row][column];}
+    public NumberSquare getNumberSquareAtPos(int row, int column){return gameBoard[row][column];}
 
     List<Integer> findNonAvailableNumbers(NumberSquare nSquare){
         LinkedHashSet<Integer> nonviables = new LinkedHashSet<>();
-        List<Integer> row = translateNumberSquaresToInts(getRow(nSquare));
+        List<Integer> row = translateNumberSquaresToInts(getRow(nSquare), VALUETYPE.REAL);
         for(int number : row){
             if(number != 0) {nonviables.add(number);}
         }
-        List<Integer> column = translateNumberSquaresToInts(getColumn(nSquare));
+        List<Integer> column = translateNumberSquaresToInts(getColumn(nSquare), VALUETYPE.REAL);
         for(int number : column){
             if(number != 0) {nonviables.add(number);}
         }
-        List<Integer> square = translateNumberSquaresToInts(getSquare(nSquare));
+        List<Integer> square = translateNumberSquaresToInts(getSquare(nSquare), VALUETYPE.REAL);
         for(int number : square){
             if(number != 0) {nonviables.add(number);}
         }
@@ -78,7 +77,7 @@ public class GameBoard {
     public int[][] sudokuIntRepresentation(VALUETYPE valuteType){
         int[][] representation = new int[9][9];
         for(int row = 0; row <= 8; row++){
-            List<Integer> rowList = translateNumberSquaresToInts(getRow(row));
+            List<Integer> rowList = translateNumberSquaresToInts(getRow(row), valuteType);
             int[] intList = new int[9];
             for(int i = 0; i <= 8; i++){
                 intList[i] = rowList.get(i);}
@@ -86,16 +85,12 @@ public class GameBoard {
         return representation;
     }
     public String toString(){
-        int[][] sudoku = sudokuIntRepresentation(VALUETYPE.START);
+        int[][] sudoku = sudokuIntRepresentation(VALUETYPE.REAL);
         SudokuStringRepresentation sr = new SudokuStringRepresentation(sudoku);
         return sr.toString();
     }
-    public List<Integer> translateNumberSquaresToInts(NumberSquare[] nSquareList){
-        ArrayList<Integer> values = new ArrayList<>();
-        for(NumberSquare square : nSquareList){
-            if(square != null) {values.add(square.getStartValue());}
-        }
-        return values;
+    public List<Integer> translateNumberSquaresToInts(NumberSquare[] nSquareList, VALUETYPE valuetype){
+        return SudokuStringRepresentation.translateNumberSquaresToInts(nSquareList, valuetype);
     }
 
 

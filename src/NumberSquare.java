@@ -8,14 +8,15 @@ public class NumberSquare implements IHasNumberSquare{
     private final int row;
     private final int column;
     private final int square;
-    private int startValue;
+    private int realValue;
     private int inputValue;
+    private boolean inputValueIsStartValue = false;
 
     NumberSquare(int row, int column){
         this.row = row;
         this.column = column;
         this.square = findSquareNumber();
-        this.startValue = 0;
+        this.realValue = 0;
     }
 
     public static int[] getAllowedNumbers(){
@@ -28,12 +29,13 @@ public class NumberSquare implements IHasNumberSquare{
         assignValue(nonViableNumbers);
     }
 
-    NumberSquare(int row, int column, int startValue){
+    NumberSquare(int row, int column, int realValue){
         this.row = row;
         this.column = column;
         this.square = findSquareNumber();
-        this.startValue = startValue;
+        this.realValue = realValue;
     }
+
 
     private int findSquareNumber(){
         return 3 * ((row) /3) + ((column) / 3);
@@ -48,26 +50,35 @@ public class NumberSquare implements IHasNumberSquare{
     public int getSquareNumber() {
         return square;
     }
-    public int getStartValue() {
-        return startValue;
+    public int getRealValue() {
+        return realValue;
     }
     public int getInputValue() {
         return inputValue;
     }
     public void setInputValue(int input_value){
-        this.inputValue = input_value;
+        if(!inputValueIsStartValue){
+            this.inputValue = input_value;
+        } else {
+            System.out.println("This number is start value");
+        }
+    }
+
+    public void setToStartValue(){
+        this.inputValue = realValue;
+        this.inputValueIsStartValue = true;
     }
     public int getValue(VALUETYPE value){
         return switch (value) {
-            case START -> getStartValue();
+            case REAL -> getRealValue();
             case INPUT -> getInputValue();
         };
     }
 
     void assignValue(List<Integer> nonViableNumbers){
-        if (startValue == 0){
+        if (realValue == 0){
             List<Integer> viableNumbers = getViableNumbers(nonViableNumbers);
-            this.startValue = getRandomViableNumber(viableNumbers);}
+            this.realValue = getRandomViableNumber(viableNumbers);}
     }
 
     public List<Integer> getViableNumbers(List<Integer> nonViableNumbers){

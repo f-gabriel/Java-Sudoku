@@ -1,4 +1,4 @@
 public enum VALUETYPE {
-    START,
+    REAL,
     INPUT
 }
