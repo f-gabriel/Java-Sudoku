@@ -6,7 +6,7 @@ public class GameBoard {
     NumberTile[][] gameBoard = new NumberTile[9][9];
 
     GameBoard(){
-        while (!isSolvable()){createGameBoard();}}
+        while (!isSolvable()) {createGameBoard();}}
     
     void createGameBoard(){
         this.gameBoard = new NumberTile[9][9];
@@ -59,7 +59,7 @@ public class GameBoard {
     }
     public NumberTile getNumberTileAtPos(int row, int column){return gameBoard[row][column];}
 
-    List<Integer> findNonAvailableNumbers(NumberTile nTile){
+    ArrayList<Integer> findNonAvailableNumbers(NumberTile nTile){
         LinkedHashSet<Integer> nonviables = new LinkedHashSet<>();
         List<Integer> row = translateNumberTileToInts(getRow(nTile), VALUETYPE.REAL);
         for(int number : row){
@@ -91,7 +91,7 @@ public class GameBoard {
         SudokuStringRepresentation sr = new SudokuStringRepresentation(sudoku);
         return sr.toString();
     }
-    public List<Integer> translateNumberTileToInts(NumberTile[] nSquareList, VALUETYPE valuetype){
+    public ArrayList<Integer> translateNumberTileToInts(NumberTile[] nSquareList, VALUETYPE valuetype){
         return SudokuStringRepresentation.translateNumberTileToInts(nSquareList, valuetype);
     }
 

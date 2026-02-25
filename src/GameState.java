@@ -10,15 +10,15 @@ public class GameState {
 
     private void createSudokuView(){
         Random r = new Random();
-        int preWrittenSquares = 7;
+        int numberOfStartTiles = 16;
 
-        for(int i = 0; i < preWrittenSquares; i++){
+        for(int i = 0; i < numberOfStartTiles; i++){
             int randomRow = r.nextInt(0,8);
             int randomColumn = r.nextInt(0,8);
 
             NumberTile ns = gBoard.getNumberTileAtPos(randomRow, randomColumn);
             switch (getSquarePosition(ns.getSquareNumber())){
-                case CORNER, MIDDLE: {
+                case MIDDLE: {
                     NumberTile ns2 = gBoard.getNumberTileAtPos(8- randomRow, randomColumn);
                     NumberTile ns3 = gBoard.getNumberTileAtPos(randomRow, 8- randomColumn);
                     NumberTile ns4 = gBoard.getNumberTileAtPos(8- randomRow, 8- randomColumn);
@@ -27,7 +27,7 @@ public class GameState {
                     ns3.setToStartValue();
                     ns4.setToStartValue();
                 }
-                case VERTICAL, HORIZONTAL: {
+                case VERTICAL, HORIZONTAL, CORNER: {
                     NumberTile ns2 = gBoard.getNumberTileAtPos(8- randomRow, 8- randomColumn);
                     ns.setToStartValue();
                     ns2.setToStartValue();
