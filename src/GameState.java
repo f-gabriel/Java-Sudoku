@@ -2,22 +2,27 @@ import java.util.Random;
 
 public class GameState {
     GameBoard gBoard;
+    SudokuSolver solver;
 
     GameState(){
-        this.gBoard = new GameBoard();
-        createSudokuView();
+        this.solver = new SudokuSolver();
+        this.gBoard = solver.solveSudoku();
+        createSudokuStartLayout();
     }
 
-    private void createSudokuView(){
+
+
+
+    private void createSudokuStartLayout(){
         Random r = new Random();
-        int numberOfStartTiles = 16;
+        int numberOfStartTiles = 17;
 
         for(int i = 0; i < numberOfStartTiles; i++){
             int randomRow = r.nextInt(0,8);
             int randomColumn = r.nextInt(0,8);
 
             NumberTile ns = gBoard.getNumberTileAtPos(randomRow, randomColumn);
-            switch (getSquarePosition(ns.getSquareNumber())){
+            switch (gBoard.getSquarePosition(ns.getSquareNumber())){
                 case MIDDLE: {
                     NumberTile ns2 = gBoard.getNumberTileAtPos(8- randomRow, randomColumn);
                     NumberTile ns3 = gBoard.getNumberTileAtPos(randomRow, 8- randomColumn);
@@ -36,15 +41,7 @@ public class GameState {
         }
     }
 
-    private SquarePosition getSquarePosition(int squareNumber){
-        return switch (squareNumber){
-            case 0, 2, 6, 8 -> SquarePosition.CORNER;
-            case 1, 7 -> SquarePosition.VERTICAL;
-            case 3, 5 -> SquarePosition.HORIZONTAL;
-            case 4 -> SquarePosition.MIDDLE;
-            default -> throw new IllegalStateException("Unexpected value: " + squareNumber);
-        };
-    }
+
 
     @Override
     public String toString() {

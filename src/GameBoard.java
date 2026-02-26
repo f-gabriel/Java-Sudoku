@@ -42,6 +42,8 @@ public class GameBoard {
         return square;
     }
 
+
+
     public NumberTile getNumberTileAtPos(int row, int column){
         return gameBoard[row][column];
     }
@@ -70,9 +72,9 @@ public class GameBoard {
         return tileArray;
     }
 
-    // todo: flytta ut denna
-    void createSolvedGameBoard(){
-        SudokuSolver ss = new SudokuSolver();
-        this.gameBoard = gameBoardToArray(ss.solveSudoku());
+    SquarePosition getSquarePosition(int squareNumber){
+        return SquarePosition.getSquarePosition(squareNumber);
     }
+
+
 }

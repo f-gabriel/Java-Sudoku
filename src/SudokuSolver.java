@@ -43,12 +43,13 @@ public class SudokuSolver {
         return gameBoard;
     }
 
+    // Checks that each coordinate on the board has a NumberTile and that the realValue for each != 0
     public boolean isSolvable(){
         boolean solvable = true;
         for(NumberTile[] row : gameBoard.gameBoard){
             if (!solvable){break;}
             for(NumberTile nTile : row){
-                solvable = nTile != null;
+                solvable = nTile != null && nTile.getRealValue() != 0;
                 if (!solvable){break;} }
         }
         return solvable;
