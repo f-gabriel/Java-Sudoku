@@ -3,13 +3,13 @@ import java.util.List;
 import java.util.Random;
 
 public class NumberTile implements IHasNumberTile {
-    static final int[] allowedNumbers = {1,2,3,4,5,6,7,8,9};
+    public static final int[] allowedNumbers = {1,2,3,4,5,6,7,8,9};
 
-    private final int row;
-    private final int column;
-    private final int square;
+    public final int row;
+    public final int column;
+    public final int square;
     private int realValue;
-    private int inputValue;
+    private int inputValue; // vill ha detta som en lista sedan.
     private boolean inputValueIsStartValue = false;
 
     NumberTile(int row, int column){
@@ -39,6 +39,7 @@ public class NumberTile implements IHasNumberTile {
     }
 
     private int findSquareNumber(){
+
         return 3 * ((row) /3) + ((column) / 3);
     }
 
