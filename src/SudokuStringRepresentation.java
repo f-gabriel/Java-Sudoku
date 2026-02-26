@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class SudokuStringRepresentation implements IHasSudokuStringRepresentation {
     int[][] gameBoard;
@@ -40,7 +39,7 @@ public class SudokuStringRepresentation implements IHasSudokuStringRepresentatio
     public static ArrayList<Integer> translateNumberTileToInts(NumberTile[] nTileList, VALUETYPE valuetype){
         ArrayList<Integer> values = new ArrayList<>();
         for(NumberTile tile : nTileList){
-            if(tile != null) {values.add(tile.getValue(valuetype));}
+            if(tile != null) {values.add(tile.getValueOfType(valuetype));}
         }
         return values;
     }

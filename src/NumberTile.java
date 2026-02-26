@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class NumberTile implements IHasNumberTile {
+public class NumberTile {
     public static final int[] allowedNumbers = {1,2,3,4,5,6,7,8,9};
 
     public final int row;
@@ -17,6 +17,7 @@ public class NumberTile implements IHasNumberTile {
         this.column = column;
         this.square = findSquareNumber();
         this.realValue = 0;
+        this.inputValue = 0;
     }
 
 
@@ -24,7 +25,7 @@ public class NumberTile implements IHasNumberTile {
         this.row = row;
         this.column = column;
         this.square = findSquareNumber();
-        assignValue(nonViableNumbers);
+        assignRealValue(nonViableNumbers);
     }
 
     NumberTile(int row, int column, int realValue){
@@ -70,17 +71,33 @@ public class NumberTile implements IHasNumberTile {
         this.inputValue = realValue;
         this.inputValueIsStartValue = true;
     }
-    public int getValue(VALUETYPE value){
+    public int getValueOfType(VALUETYPE value){
         return switch (value) {
             case REAL -> getRealValue();
             case INPUT -> getInputValue();
         };
     }
 
-    void assignValue(List<Integer> nonViableNumbers){
+    void assignValueOfType(VALUETYPE value, List<Integer> nonViableNumbers){
+        switch (value) {
+            case REAL -> assignRealValue(nonViableNumbers);
+            case INPUT -> {
+                if (realValue == 0 ) {
+                    List<Integer> viableNumbers = getViableNumbers(nonViableNumbers);
+                    int randInputValue = getRandomViableNumber(viableNumbers);
+                    setInputValue(randInputValue);
+                }
+            }
+        };
+    }
+
+    void assignRealValue(List<Integer> nonViableNumbers){
         if (realValue == 0 ){
             List<Integer> viableNumbers = getViableNumbers(nonViableNumbers);
             this.realValue = getRandomViableNumber(viableNumbers);}
+        else{
+            System.out.println("Can't change real value");
+        }
     }
 
     public List<Integer> getViableNumbers(List<Integer> nonViableNumbers){

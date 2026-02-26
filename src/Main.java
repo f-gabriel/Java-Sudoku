@@ -1,9 +1,8 @@
 class Main {
-  GameState gameBoard = new GameState();
+  GameState gameState;
 
   public void main(String[] args){
-
-    System.out.println("\n" + gameBoard.toString());
+    this.gameState = new GameState();
   }
 
 

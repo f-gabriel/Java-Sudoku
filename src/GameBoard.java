@@ -42,7 +42,9 @@ public class GameBoard {
         return square;
     }
 
-
+    public void handlePlayerInput(int row, int column, int inputValue){
+        getNumberTileAtPos(row, column).setInputValue(inputValue);
+    }
 
     public NumberTile getNumberTileAtPos(int row, int column){
         return gameBoard[row][column];

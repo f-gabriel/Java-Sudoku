@@ -25,8 +25,8 @@ public class SudokuSolver {
         return gb;
     }
 
-    public GameBoard solveSudoku(){
-        while (!isSolvable()) {
+    public GameBoard solveSudoku(VALUETYPE valuetype){
+        while (!isSolvable(valuetype)) {
             this.gameBoard = new GameBoard();
             for (int row = 0; row <= 8; row++) {
                 for (int column = 0; column <= 8; column++) {
@@ -35,7 +35,7 @@ public class SudokuSolver {
                     if (nonavailableNumbers.size() == 9) {
                         break;
                     }
-                    ns.assignValue(nonavailableNumbers);
+                    ns.assignValueOfType(valuetype, nonavailableNumbers);
                     gameBoard.gameBoard[row][column] = ns;
                 }
             }
@@ -44,12 +44,12 @@ public class SudokuSolver {
     }
 
     // Checks that each coordinate on the board has a NumberTile and that the realValue for each != 0
-    public boolean isSolvable(){
+    public boolean isSolvable(VALUETYPE valuetype){
         boolean solvable = true;
         for(NumberTile[] row : gameBoard.gameBoard){
             if (!solvable){break;}
             for(NumberTile nTile : row){
-                solvable = nTile != null && nTile.getRealValue() != 0;
+                solvable = nTile != null && nTile.getValueOfType(valuetype) != 0;
                 if (!solvable){break;} }
         }
         return solvable;
