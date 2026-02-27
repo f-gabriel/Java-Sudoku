@@ -1,22 +1,25 @@
+package Control;
+
+import Enums.EVENTS;
+
 import java.util.Scanner;
 
 public class PlayerTextInput {
-    private final String inputMessage;
-    private final String[] inputVariables;
+    private final EVENTS[] inputVariables;
     private int[] playerInputInts;
+
 
     private final Scanner scanner;
 
-    PlayerTextInput(){
-        this.inputMessage = "Input ";
-        this.inputVariables = new String[]{"row (1-9): ", "column(1-9): ", "value between 1-9: "};
+    public PlayerTextInput(){
+        this.inputVariables = new EVENTS[]{EVENTS.INPUT_ROW, EVENTS.INPUT_COLUMN, EVENTS.INPUT_VALUE};
         this.playerInputInts = new int[3];
         this.scanner = new Scanner(System.in);
     }
 
     public int[] getPlayerInput(){
         for(int i = 0; i <= 2; i++){
-            String message = inputMessage + inputVariables[i];
+            String message = inputVariables[i].getMessage();
             System.out.println(message);
             String input = scanner.nextLine();
 
@@ -47,8 +50,8 @@ public class PlayerTextInput {
     }
 
     private String badInputResponse(){
-        System.out.println("Input has to be integer between 1-9");
-        System.out.println("please make new input");
+        System.out.println(EVENTS.WRONG_SUDOKU_INPUT.getMessage());
+        System.out.println(EVENTS.NEW_INPUT.getMessage());
         return scanner.nextLine();
     }
 }

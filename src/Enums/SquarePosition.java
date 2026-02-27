@@ -1,4 +1,4 @@
-import java.util.Arrays;
+package Enums;
 
 public enum SquarePosition {
     CORNER(new int[]{0, 2, 6, 8}),
@@ -16,7 +16,7 @@ public enum SquarePosition {
         return squareNumbers;
     }
 
-    static SquarePosition getSquarePosition(int squareNumber) {
+    public static SquarePosition getSquarePosition(int squareNumber) {
         return switch (squareNumber){
             case 0, 2, 6, 8 -> SquarePosition.CORNER;
             case 1, 7 -> SquarePosition.VERTICAL;

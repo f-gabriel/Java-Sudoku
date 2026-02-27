@@ -1,6 +1,15 @@
+package Model;
+
+import Control.PlayerTextInput;
+import Enums.VALUETYPE;
+import View.IHasSudokuStringRepresentation;
+import View.SudokuStringRepresentation;
+import View.TextView;
+
+
 import java.util.Random;
 
-public class GameState implements IHasSudokuStringRepresentation{
+public class GameState implements IHasSudokuStringRepresentation {
     GameBoard gBoard;
     SudokuSolver solver;
     PlayerTextInput textInput;
@@ -10,42 +19,13 @@ public class GameState implements IHasSudokuStringRepresentation{
 
 
 
-    GameState(){
+    public GameState(){
         this.solver = new SudokuSolver();
         this.gBoard = solver.solveSudoku(VALUETYPE.REAL);
         this.textInput = new PlayerTextInput();
         this.textView = new TextView();
         play();
 
-    }
-
-
-    private void createSudokuStartLayout(){
-        Random r = new Random();
-        int numberOfStartTiles = 17;
-
-        for(int i = 0; i < numberOfStartTiles; i++){
-            int randomRow = r.nextInt(0,8);
-            int randomColumn = r.nextInt(0,8);
-
-            NumberTile ns = gBoard.getNumberTileAtPos(randomRow, randomColumn);
-            switch (gBoard.getSquarePosition(ns.getSquareNumber())){
-                case MIDDLE: {
-                    NumberTile ns2 = gBoard.getNumberTileAtPos(8- randomRow, randomColumn);
-                    NumberTile ns3 = gBoard.getNumberTileAtPos(randomRow, 8- randomColumn);
-                    NumberTile ns4 = gBoard.getNumberTileAtPos(8- randomRow, 8- randomColumn);
-                    ns.setToStartValue();
-                    ns2.setToStartValue();
-                    ns3.setToStartValue();
-                    ns4.setToStartValue();
-                }
-                case VERTICAL, HORIZONTAL, CORNER: {
-                    NumberTile ns2 = gBoard.getNumberTileAtPos(8- randomRow, 8- randomColumn);
-                    ns.setToStartValue();
-                    ns2.setToStartValue();
-                }
-            }
-        }
     }
 
     private void play(){
@@ -64,6 +44,36 @@ public class GameState implements IHasSudokuStringRepresentation{
             clearConsole();
         }
     }
+
+    private void createSudokuStartLayout(){
+        Random r = new Random();
+        int numberOfStartTiles = 38;
+
+        for(int i = 0; i < numberOfStartTiles; i++){
+            int randomRow = r.nextInt(0,8);
+            int randomColumn = r.nextInt(0,8);
+
+            gBoard.setPositionToStartValue(randomRow, randomColumn);
+//            switch (gBoard.getSquarePosition(ns.getSquareNumber())){
+//                case MIDDLE: {
+//                    NumberTile ns2 = gBoard.getNumberTileAtPos(8- randomRow, randomColumn);
+//                    NumberTile ns3 = gBoard.getNumberTileAtPos(randomRow, 8- randomColumn);
+//                    NumberTile ns4 = gBoard.getNumberTileAtPos(8- randomRow, 8- randomColumn);
+//                    ns.setToStartValue();
+//                    ns2.setToStartValue();
+//                    ns3.setToStartValue();
+//                    ns4.setToStartValue();
+//                }
+//                case VERTICAL, HORIZONTAL, CORNER: {
+//                    NumberTile ns2 = gBoard.getNumberTileAtPos(8- randomRow, 8- randomColumn);
+//                    ns.setToStartValue();
+//                    ns2.setToStartValue();
+//                }
+//            }
+        }
+    }
+
+
 
     private void handlePlayerInput(int[] playerInputs){
         gBoard.handlePlayerInput(playerInputs[0], playerInputs[1], playerInputs[2]);

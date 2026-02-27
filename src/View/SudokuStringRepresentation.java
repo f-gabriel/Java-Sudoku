@@ -1,9 +1,14 @@
+package View;
+
+import Enums.VALUETYPE;
+import Model.NumberTile;
+
 import java.util.ArrayList;
 
 public class SudokuStringRepresentation implements IHasSudokuStringRepresentation {
     int[][] gameBoard;
 
-    SudokuStringRepresentation(int[][] gameBoard){
+    public SudokuStringRepresentation(int[][] gameBoard){
         this.gameBoard = gameBoard;
     }
 

@@ -1,3 +1,5 @@
+package Enums;
+
 public enum MENU {
     START("New Game"),
     MENU("Menu"),

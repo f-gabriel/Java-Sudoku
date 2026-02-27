@@ -1,32 +1,23 @@
-import java.util.HashMap;
+package View;
+
+import Enums.EVENTS;
+import Enums.MENU;
 
 public class TextView {
-    HashMap<String, String> eventMessages;
+
 
     public TextView(){
-        createEventMessages();
 
     }
 
-    // The final messages should be something like "1. New Game", "2. Menu"
-    private void createEventMessages() {
-        HashMap<String, String> em = new HashMap<>();
-        em.put("start", "New Game"); // em.put("", "");
-        em.put("menu", "Menu");
-        em.put("help", "Help");
-        em.put("solve", "Solve Sudoku");
-        em.put("end", "Exit");
 
-        this.eventMessages = em;
-    }
 
-    private String getEventMessage(String event){
-        return eventMessages.get(event);
-    }
+
+
 
     private String menuBuilder(MENU[] menuOptions, String[] specialInputChars){
         if(menuOptions.length != specialInputChars.length && specialInputChars.length != 0){
-            System.out.println("If using special input, they need to be the same number as menu options");
+            System.out.println(EVENTS.SPECIAL_INPUT_ERROR.getMessage());
             return"";
         }
 

@@ -1,3 +1,8 @@
+package Model;
+
+import Enums.EVENTS;
+import Enums.VALUETYPE;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -20,6 +25,14 @@ public class NumberTile {
         this.inputValue = 0;
     }
 
+    NumberTile(NumberTile nt){
+        this.row = nt.row;
+        this.column = nt.column;
+        this.square = findSquareNumber();
+        this.realValue = nt.realValue;
+        this.inputValue = nt.inputValue;
+        this.inputValueIsStartValue = nt.inputValueIsStartValue;
+    }
 
     NumberTile(int row, int column, List<Integer> nonViableNumbers){
         this.row = row;
@@ -59,11 +72,12 @@ public class NumberTile {
     public int getInputValue() {
         return inputValue;
     }
+    public boolean getIsStartValue(){return inputValueIsStartValue;}
     public void setInputValue(int input_value){
         if(!inputValueIsStartValue){
             this.inputValue = input_value;
         } else {
-            System.out.println("This number is start value");
+            System.out.println(EVENTS.CHANGE_START_VALUE.getMessage());
         }
     }
 
@@ -96,7 +110,7 @@ public class NumberTile {
             List<Integer> viableNumbers = getViableNumbers(nonViableNumbers);
             this.realValue = getRandomViableNumber(viableNumbers);}
         else{
-            System.out.println("Can't change real value");
+            System.out.println(EVENTS.CHANGE_REAL_VALUE.getMessage());
         }
     }
 

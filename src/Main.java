@@ -1,3 +1,5 @@
+import Model.GameState;
+
 class Main {
   GameState gameState;
 
