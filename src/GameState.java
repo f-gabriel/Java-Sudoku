@@ -4,6 +4,7 @@ public class GameState implements IHasSudokuStringRepresentation{
     GameBoard gBoard;
     SudokuSolver solver;
     PlayerTextInput textInput;
+    TextView textView;
 
     boolean playing;
 
@@ -13,6 +14,7 @@ public class GameState implements IHasSudokuStringRepresentation{
         this.solver = new SudokuSolver();
         this.gBoard = solver.solveSudoku(VALUETYPE.REAL);
         this.textInput = new PlayerTextInput();
+        this.textView = new TextView();
         play();
 
     }

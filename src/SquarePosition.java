@@ -6,15 +6,17 @@ public enum SquarePosition {
     VERTICAL(new int[]{3,5}),
     MIDDLE(new int[]{4});
 
-    int[] squareNumbers;
+    final int[] squareNumbers;
 
     private SquarePosition(int[] squareNumbers) {
         this.squareNumbers = squareNumbers;
     }
+
     public int[] getSquareNumbers() {
         return squareNumbers;
     }
-     static SquarePosition getSquarePosition(int squareNumber) {
+
+    static SquarePosition getSquarePosition(int squareNumber) {
         return switch (squareNumber){
             case 0, 2, 6, 8 -> SquarePosition.CORNER;
             case 1, 7 -> SquarePosition.VERTICAL;

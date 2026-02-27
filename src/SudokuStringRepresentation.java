@@ -28,7 +28,7 @@ public class SudokuStringRepresentation implements IHasSudokuStringRepresentatio
             if (gameBoard[row][place] == 0) { // should be getInputValue()
                 returnString.append("_ ");
             } else {
-                returnString.append(gameBoard[row][place] + " ");
+                returnString.append(gameBoard[row][place]).append(" ");
             }
             if((place + 1) % 3 == 0 && place != 8){
                 returnString.append("| ");}
