@@ -48,12 +48,9 @@ public class NumberTile {
         this.realValue = realValue;
     }
 
-    public static int[] getAllowedNumbers(){
-        return allowedNumbers;
-    }
+
 
     private int findSquareNumber(){
-
         return 3 * ((row) /3) + ((column) / 3);
     }
 
@@ -77,7 +74,7 @@ public class NumberTile {
         if(!inputValueIsStartValue){
             this.inputValue = input_value;
         } else {
-            System.out.println(EVENTS.CHANGE_START_VALUE.getMessage());
+            System.out.println(EVENTS.TRYING_TO_CHANGE_START_VALUE.getMessage());
         }
     }
 
@@ -110,8 +107,12 @@ public class NumberTile {
             List<Integer> viableNumbers = getViableNumbers(nonViableNumbers);
             this.realValue = getRandomViableNumber(viableNumbers);}
         else{
-            System.out.println(EVENTS.CHANGE_REAL_VALUE.getMessage());
+            System.out.println(EVENTS.TRYING_TO_CHANGE_REAL_VALUE.getMessage());
         }
+    }
+
+    public static int[] getAllowedNumbers(){
+        return allowedNumbers;
     }
 
     public List<Integer> getViableNumbers(List<Integer> nonViableNumbers){

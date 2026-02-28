@@ -34,7 +34,7 @@ public class SudokuSolver {
             this.gameBoard = new GameBoard();
             for (int row = 0; row <= 8; row++) {
                 for (int column = 0; column <= 8; column++) {
-                    NumberTile ns = gameBoard.getNumberTileAtPos(row, column);
+                    NumberTile ns = gameBoard.getNumberTileRepresentation(row, column);
                     List<Integer> nonavailableNumbers = findNonAvailableNumbers(ns);
                     if (nonavailableNumbers.size() == 9) {
                         break;

@@ -1,6 +1,6 @@
 package Enums;
 
-public enum SquarePosition {
+public enum SQUARE_POSITION {
     CORNER(new int[]{0, 2, 6, 8}),
     HORIZONTAL(new int[]{1,7}),
     VERTICAL(new int[]{3,5}),
@@ -8,7 +8,7 @@ public enum SquarePosition {
 
     final int[] squareNumbers;
 
-    private SquarePosition(int[] squareNumbers) {
+    private SQUARE_POSITION(int[] squareNumbers) {
         this.squareNumbers = squareNumbers;
     }
 
@@ -16,12 +16,12 @@ public enum SquarePosition {
         return squareNumbers;
     }
 
-    public static SquarePosition getSquarePosition(int squareNumber) {
+    public static SQUARE_POSITION getSquarePosition(int squareNumber) {
         return switch (squareNumber){
-            case 0, 2, 6, 8 -> SquarePosition.CORNER;
-            case 1, 7 -> SquarePosition.VERTICAL;
-            case 3, 5 -> SquarePosition.HORIZONTAL;
-            case 4 -> SquarePosition.MIDDLE;
+            case 0, 2, 6, 8 -> SQUARE_POSITION.CORNER;
+            case 1, 7 -> SQUARE_POSITION.VERTICAL;
+            case 3, 5 -> SQUARE_POSITION.HORIZONTAL;
+            case 4 -> SQUARE_POSITION.MIDDLE;
             default -> throw new IllegalStateException("Unexpected value: " + squareNumber);
         };
     }

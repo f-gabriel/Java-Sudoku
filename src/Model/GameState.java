@@ -47,29 +47,24 @@ public class GameState implements IHasSudokuStringRepresentation {
 
     private void createSudokuStartLayout(){
         Random r = new Random();
-        int numberOfStartTiles = 38;
+        int numberOfStartTiles = 18;
 
         for(int i = 0; i < numberOfStartTiles; i++){
             int randomRow = r.nextInt(0,8);
             int randomColumn = r.nextInt(0,8);
 
             gBoard.setPositionToStartValue(randomRow, randomColumn);
-//            switch (gBoard.getSquarePosition(ns.getSquareNumber())){
-//                case MIDDLE: {
-//                    NumberTile ns2 = gBoard.getNumberTileAtPos(8- randomRow, randomColumn);
-//                    NumberTile ns3 = gBoard.getNumberTileAtPos(randomRow, 8- randomColumn);
-//                    NumberTile ns4 = gBoard.getNumberTileAtPos(8- randomRow, 8- randomColumn);
-//                    ns.setToStartValue();
-//                    ns2.setToStartValue();
-//                    ns3.setToStartValue();
-//                    ns4.setToStartValue();
-//                }
-//                case VERTICAL, HORIZONTAL, CORNER: {
-//                    NumberTile ns2 = gBoard.getNumberTileAtPos(8- randomRow, 8- randomColumn);
-//                    ns.setToStartValue();
-//                    ns2.setToStartValue();
-//                }
-//            }
+            NumberTile ns = gBoard.getNumberTileRepresentation(randomRow, randomColumn);
+            switch (gBoard.getSquarePosition(ns.getSquareNumber())){
+                case MIDDLE: {
+                    gBoard.setPositionToStartValue(8- randomRow, randomColumn);
+                    gBoard.setPositionToStartValue(randomRow, 8- randomColumn);
+                    gBoard.setPositionToStartValue(8- randomRow, 8- randomColumn);
+                }
+                case VERTICAL, HORIZONTAL, CORNER: {
+                    gBoard.setPositionToStartValue(8- randomRow, 8- randomColumn);
+                }
+            }
         }
     }
 

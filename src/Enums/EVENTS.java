@@ -7,8 +7,8 @@ public enum EVENTS {
     WRONG_SUDOKU_INPUT("Input has to be integer between 1-9"),
     NEW_INPUT("please make new input: "),
     SPECIAL_INPUT_ERROR("If using special input, they need to be the same number as menu options"),
-    CHANGE_START_VALUE("This number is start value"),
-    CHANGE_REAL_VALUE("Can't change real value"),;
+    TRYING_TO_CHANGE_START_VALUE("This number is start value"),
+    TRYING_TO_CHANGE_REAL_VALUE("Can't change real value"),;
 
 
     private final String message;

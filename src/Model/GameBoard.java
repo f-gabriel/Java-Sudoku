@@ -1,6 +1,6 @@
 package Model;
 
-import Enums.SquarePosition;
+import Enums.SQUARE_POSITION;
 import Enums.VALUETYPE;
 import View.SudokuStringRepresentation;
 
@@ -48,12 +48,12 @@ public class GameBoard {
     }
 
     public void handlePlayerInput(int row, int column, int inputValue){
-        getNumberTileRepresentaion(row, column).setInputValue(inputValue);
+        getNumberTileAtPos(row, column).setInputValue(inputValue);
     }
     public void setPositionToStartValue(int row, int column){
-        getNumberTileRepresentaion(row, column).setToStartValue();
+        getNumberTileAtPos(row, column).setToStartValue();
     }
-    public NumberTile getNumberTileRepresentaion(int row, int column){
+    public NumberTile getNumberTileRepresentation(int row, int column){
         return new NumberTile(gameBoard[row][column]);
     }
     private NumberTile getNumberTileAtPos(int row, int column){
@@ -84,8 +84,8 @@ public class GameBoard {
         return tileArray;
     }
 
-    SquarePosition getSquarePosition(int squareNumber){
-        return SquarePosition.getSquarePosition(squareNumber);
+    SQUARE_POSITION getSquarePosition(int squareNumber){
+        return SQUARE_POSITION.getSquarePosition(squareNumber);
     }
 
 
