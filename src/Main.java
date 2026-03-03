@@ -1,11 +1,15 @@
+import Control.SudokuButton;
 import Model.GameState;
+import Model.NumberTile;
+import View.GraphicView;
 
-class Main {
-  GameState gameState;
+public class Main {
+    GameState gameState;
+    GraphicView view;
 
-  public void main(String[] args){
-    this.gameState = new GameState();
+
+    public void main(String[] args){
+        this.view = new GraphicView();
+        //this.gameState = new GameState();
   }
-
-
 }

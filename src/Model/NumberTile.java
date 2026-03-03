@@ -17,7 +17,7 @@ public class NumberTile {
     private int inputValue; // vill ha detta som en lista sedan.
     private boolean inputValueIsStartValue = false;
 
-    NumberTile(int row, int column){
+    public NumberTile(int row, int column){
         this.row = row;
         this.column = column;
         this.square = findSquareNumber();
@@ -25,7 +25,7 @@ public class NumberTile {
         this.inputValue = 0;
     }
 
-    NumberTile(NumberTile nt){
+    public NumberTile(NumberTile nt){
         this.row = nt.row;
         this.column = nt.column;
         this.square = findSquareNumber();
@@ -34,14 +34,14 @@ public class NumberTile {
         this.inputValueIsStartValue = nt.inputValueIsStartValue;
     }
 
-    NumberTile(int row, int column, List<Integer> nonViableNumbers){
+    public NumberTile(int row, int column, List<Integer> nonViableNumbers){
         this.row = row;
         this.column = column;
         this.square = findSquareNumber();
         assignRealValue(nonViableNumbers);
     }
 
-    NumberTile(int row, int column, int realValue){
+    public NumberTile(int row, int column, int realValue){
         this.row = row;
         this.column = column;
         this.square = findSquareNumber();
@@ -82,6 +82,7 @@ public class NumberTile {
         this.inputValue = realValue;
         this.inputValueIsStartValue = true;
     }
+
     public int getValueOfType(VALUETYPE value){
         return switch (value) {
             case REAL -> getRealValue();
@@ -89,7 +90,7 @@ public class NumberTile {
         };
     }
 
-    void assignValueOfType(VALUETYPE value, List<Integer> nonViableNumbers){
+    public void assignValueOfType(VALUETYPE value, List<Integer> nonViableNumbers){
         switch (value) {
             case REAL -> assignRealValue(nonViableNumbers);
             case INPUT -> {
@@ -102,7 +103,7 @@ public class NumberTile {
         };
     }
 
-    void assignRealValue(List<Integer> nonViableNumbers){
+    public void assignRealValue(List<Integer> nonViableNumbers){
         if (realValue == 0 ){
             List<Integer> viableNumbers = getViableNumbers(nonViableNumbers);
             this.realValue = getRandomViableNumber(viableNumbers);}

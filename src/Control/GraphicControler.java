@@ -1,5 +1,7 @@
 package Control;
 
+import Model.NumberTile;
+
 import javax.swing.*;
 
 public class GraphicControler {
@@ -7,4 +9,12 @@ public class GraphicControler {
 
     JButton[][] buttons;
 
+    public GraphicControler(){
+
+
+
+    NumberTile nTile = new NumberTile(0,0,9);
+    nTile.setToStartValue();
+    SudokuButton sudokuButton = new SudokuButton(nTile);
+    }
 }
