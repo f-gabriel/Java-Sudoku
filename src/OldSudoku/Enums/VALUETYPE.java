@@ -1,4 +1,4 @@
-package Enums;
+package OldSudoku.Enums;
 
 public enum VALUETYPE {
     REAL,

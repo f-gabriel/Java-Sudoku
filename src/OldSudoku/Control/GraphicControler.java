@@ -1,6 +1,6 @@
-package Control;
+package OldSudoku.Control;
 
-import Model.NumberTile;
+import OldSudoku.Model.NumberTile;
 
 import javax.swing.*;
 

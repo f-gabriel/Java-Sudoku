@@ -1,6 +1,6 @@
-package Control;
+package OldSudoku.Control;
 
-import Enums.EVENTS;
+import OldSudoku.Enums.EVENTS;
 
 import java.util.Scanner;
 

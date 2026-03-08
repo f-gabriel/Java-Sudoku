@@ -1,8 +1,8 @@
-package Model;
+package OldSudoku.Model;
 
-import Enums.SQUARE_POSITION;
-import Enums.VALUETYPE;
-import View.SudokuStringRepresentation;
+import OldSudoku.Enums.SQUARE_POSITION;
+import OldSudoku.Enums.VALUETYPE;
+import OldSudoku.View.SudokuStringRepresentation;
 
 import java.util.ArrayList;
 import java.util.List;

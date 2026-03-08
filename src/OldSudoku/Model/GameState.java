@@ -1,10 +1,10 @@
-package Model;
+package OldSudoku.Model;
 
-import Control.PlayerTextInput;
-import Enums.VALUETYPE;
-import View.IHasSudokuStringRepresentation;
-import View.SudokuStringRepresentation;
-import View.TextView;
+import OldSudoku.Control.PlayerTextInput;
+import OldSudoku.Enums.VALUETYPE;
+import OldSudoku.View.IHasSudokuStringRepresentation;
+import OldSudoku.View.SudokuStringRepresentation;
+import OldSudoku.View.TextView;
 
 
 import java.util.Random;

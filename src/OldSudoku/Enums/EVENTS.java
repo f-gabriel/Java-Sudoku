@@ -1,4 +1,4 @@
-package Enums;
+package OldSudoku.Enums;
 
 public enum EVENTS {
     INPUT_ROW("Input row (1-9): "),

@@ -1,7 +1,7 @@
-package View;
+package OldSudoku.View;
 
-import Enums.EVENTS;
-import Enums.MENU;
+import OldSudoku.Enums.EVENTS;
+import OldSudoku.Enums.MENU;
 
 public class TextView {
 

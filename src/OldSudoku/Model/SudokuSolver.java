@@ -1,6 +1,6 @@
-package Model;
+package OldSudoku.Model;
 
-import Enums.VALUETYPE;
+import OldSudoku.Enums.VALUETYPE;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -47,7 +47,7 @@ public class SudokuSolver {
         return gameBoard;
     }
 
-    // Checks that each coordinate on the board has a Model.NumberTile and that the realValue for each != 0
+    // Checks that each coordinate on the board has a OldSudoku.Model.NumberTile and that the realValue for each != 0
     public boolean isSolvable(VALUETYPE valuetype){
         boolean solvable = true;
         for(NumberTile[] row : gameBoard.gameBoard){

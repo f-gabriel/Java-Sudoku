@@ -1,7 +1,6 @@
-package Control;
+package OldSudoku.Control;
 
-import Enums.VALUETYPE;
-import Model.NumberTile;
+import OldSudoku.Model.NumberTile;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

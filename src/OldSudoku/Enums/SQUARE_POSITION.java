@@ -1,4 +1,4 @@
-package Enums;
+package OldSudoku.Enums;
 
 public enum SQUARE_POSITION {
     CORNER(new int[]{0, 2, 6, 8}),

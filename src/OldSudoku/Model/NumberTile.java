@@ -1,7 +1,7 @@
-package Model;
+package OldSudoku.Model;
 
-import Enums.EVENTS;
-import Enums.VALUETYPE;
+import OldSudoku.Enums.EVENTS;
+import OldSudoku.Enums.VALUETYPE;
 
 import java.util.ArrayList;
 import java.util.List;

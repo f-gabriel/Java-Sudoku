@@ -1,7 +1,7 @@
-package View;
+package OldSudoku.View;
 
-import Enums.VALUETYPE;
-import Model.NumberTile;
+import OldSudoku.Enums.VALUETYPE;
+import OldSudoku.Model.NumberTile;
 
 import java.util.ArrayList;
 
