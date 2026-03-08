@@ -1,4 +1,4 @@
 package NewSudoku;
 
-public class Column extends NineTiles {
+public class Column extends NumberContainer {
 }

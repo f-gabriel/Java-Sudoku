@@ -1,6 +1,6 @@
 package NewSudoku;
 
-public class Row extends NineTiles {
+public class Row extends NumberContainer {
     private Row(int name, int[] occupiedNumber){
         super(name, occupiedNumber);
     }

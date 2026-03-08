@@ -1,14 +1,14 @@
 package NewSudoku;
 
-abstract public class NineTiles {
+abstract public class NumberContainer implements INumberContainer {
     int name;
     int[] occupiedNumbers = new int[9];
 
-    public NineTiles(int name){
+    public NumberContainer(int name){
         this.name=name;
     }
 
-    public NineTiles(int name, int[] occupiedNumbers){
+    public NumberContainer(int name, int[] occupiedNumbers){
         this.name=name;
         this.occupiedNumbers=occupiedNumbers;
     }

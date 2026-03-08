@@ -1,4 +1,4 @@
 package NewSudoku;
 
-public class Square extends NineTiles {
+public class Square extends NumberContainer {
 }
